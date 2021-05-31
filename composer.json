@@ -1,0 +1,13 @@
+{
+    "name": "kirillbdev/php-dto",
+    "description": "Transform your data into typed objects",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kirillbdev",
+            "email": "kirill.babinec@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
