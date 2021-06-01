@@ -6,7 +6,8 @@ interface DataObjectInterface
 {
     /**
      * @param string $key
+     * @param mixed $default
      * @return mixed
      */
-    public function getValue(string $key);
+    public function get(string $key, $default = null);
 }

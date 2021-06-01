@@ -1,5 +1,5 @@
 {
-    "name": "kirillbdev/php-dto",
+    "name": "kirillbdev/php-data-transfer",
     "description": "Transform your data into typed objects",
     "license": "MIT",
     "authors": [
