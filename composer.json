@@ -10,9 +10,17 @@
     ],
     "minimum-stability": "dev",
     "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.5.8"
+    },
     "autoload": {
         "psr-4": {
             "kirillbdev\\PhpDataTransfer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "kirillbdev\\PhpDataTransfer\\Tests\\": "tests/"
         }
     }
 }
