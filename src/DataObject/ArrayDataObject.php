@@ -1,8 +1,8 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\DataObject;
+namespace kirillbdev\PhpDataTransformer\DataObject;
 
-use kirillbdev\PhpDataTransfer\Contracts\DataObjectInterface;
+use kirillbdev\PhpDataTransformer\Contracts\DataObjectInterface;
 
 class ArrayDataObject implements DataObjectInterface
 {

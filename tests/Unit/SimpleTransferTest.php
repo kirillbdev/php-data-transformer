@@ -1,12 +1,12 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\Tests\Unit;
+namespace kirillbdev\PhpDataTransformer\Tests\Unit;
 
-use kirillbdev\PhpDataTransfer\DataObject\ArrayDataObject;
-use kirillbdev\PhpDataTransfer\DtoTransfer;
-use kirillbdev\PhpDataTransfer\Tests\Dto\CastingUserDto;
-use kirillbdev\PhpDataTransfer\Tests\Dto\ReceiveFromUserDto;
-use kirillbdev\PhpDataTransfer\Tests\Dto\SimpleUserDto;
+use kirillbdev\PhpDataTransformer\DataObject\ArrayDataObject;
+use kirillbdev\PhpDataTransformer\DataTransformer;
+use kirillbdev\PhpDataTransformer\Tests\Dto\CastingUserDto;
+use kirillbdev\PhpDataTransformer\Tests\Dto\ReceiveFromUserDto;
+use kirillbdev\PhpDataTransformer\Tests\Dto\SimpleUserDto;
 use PHPUnit\Framework\TestCase;
 
 class SimpleTransferTest extends TestCase
@@ -14,7 +14,7 @@ class SimpleTransferTest extends TestCase
     public function testWithoutAttributes()
     {
         /** @var SimpleUserDto $dto */
-        $dto = DtoTransfer::makeDTO(SimpleUserDto::class, new ArrayDataObject([
+        $dto = DataTransformer::transform(SimpleUserDto::class, new ArrayDataObject([
             'id' => '10',
             'name' => 'Jonny'
         ]));
@@ -26,7 +26,7 @@ class SimpleTransferTest extends TestCase
     public function testWithReceiveFromAttribute()
     {
         /** @var ReceiveFromUserDto $dto */
-        $dto = DtoTransfer::makeDTO(ReceiveFromUserDto::class, new ArrayDataObject([
+        $dto = DataTransformer::transform(ReceiveFromUserDto::class, new ArrayDataObject([
             'id' => '10',
             'user_name' => 'Jonny'
         ]));
@@ -38,7 +38,7 @@ class SimpleTransferTest extends TestCase
     public function testWithCastingAttributes()
     {
         /** @var CastingUserDto $dto */
-        $dto = DtoTransfer::makeDTO(CastingUserDto::class, new ArrayDataObject([
+        $dto = DataTransformer::transform(CastingUserDto::class, new ArrayDataObject([
             'id' => '10',
             'rating' => '4.5',
             'isAdmin' => '1'
@@ -52,7 +52,7 @@ class SimpleTransferTest extends TestCase
     public function testCustomTransform()
     {
         /** @var SimpleUserDto $dto */
-        $dto = DtoTransfer::makeDTO(SimpleUserDto::class, new ArrayDataObject([
+        $dto = DataTransformer::transform(SimpleUserDto::class, new ArrayDataObject([
             'id' => '10',
             'name' => 'Jonny',
             'role' => 'manager'

@@ -1,9 +1,9 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\DataObject\Laravel;
+namespace kirillbdev\PhpDataTransformer\DataObject\Laravel;
 
 use Illuminate\Http\Request;
-use kirillbdev\PhpDataTransfer\Contracts\DataObjectInterface;
+use kirillbdev\PhpDataTransformer\Contracts\DataObjectInterface;
 
 class RequestDataObject implements DataObjectInterface
 {

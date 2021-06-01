@@ -1,6 +1,6 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\Tests\Dto;
+namespace kirillbdev\PhpDataTransformer\Tests\Dto;
 
 class UserDto
 {
@@ -17,7 +17,7 @@ class UserDto
 
     /**
      * @var UserRoleDto
-     * @Cast(DTO<kirillbdev\PhpDataTransfer\Tests\Dto\UserRoleDto>)
+     * @Cast(<kirillbdev\PhpDataTransformer\Tests\Dto\UserRoleDto>)
      */
     public $role;
 }

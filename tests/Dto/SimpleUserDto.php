@@ -1,8 +1,8 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\Tests\Dto;
+namespace kirillbdev\PhpDataTransformer\Tests\Dto;
 
-use kirillbdev\PhpDataTransfer\Contracts\DataObjectInterface;
+use kirillbdev\PhpDataTransformer\Contracts\DataObjectInterface;
 
 class SimpleUserDto
 {

@@ -1,5 +1,5 @@
 {
-    "name": "kirillbdev/php-data-transfer",
+    "name": "kirillbdev/php-data-transformer",
     "description": "Transform your data into typed objects",
     "license": "MIT",
     "authors": [
@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "kirillbdev\\PhpDataTransfer\\": "src/"
+            "kirillbdev\\PhpDataTransformer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "kirillbdev\\PhpDataTransfer\\Tests\\": "tests/"
+            "kirillbdev\\PhpDataTransformer\\Tests\\": "tests/"
         }
     }
 }

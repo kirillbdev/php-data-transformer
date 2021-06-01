@@ -1,8 +1,8 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\Contracts;
+namespace kirillbdev\PhpDataTransformer\Contracts;
 
 interface PropertyAttributeInterface
 {
-    public function applyTo(object $dto, DataObjectInterface $dataObject, \ReflectionProperty $property);
+    public function applyTo(object $obj, DataObjectInterface $dataObject, \ReflectionProperty $property);
 }

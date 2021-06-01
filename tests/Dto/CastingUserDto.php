@@ -1,6 +1,6 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\Tests\Dto;
+namespace kirillbdev\PhpDataTransformer\Tests\Dto;
 
 class CastingUserDto
 {

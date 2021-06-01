@@ -1,9 +1,9 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\Attributes;
+namespace kirillbdev\PhpDataTransformer\Attributes;
 
-use kirillbdev\PhpDataTransfer\Contracts\DataObjectInterface;
-use kirillbdev\PhpDataTransfer\Contracts\PropertyAttributeInterface;
+use kirillbdev\PhpDataTransformer\Contracts\DataObjectInterface;
+use kirillbdev\PhpDataTransformer\Contracts\PropertyAttributeInterface;
 
 class ReceiveFromAttribute implements PropertyAttributeInterface
 {
@@ -17,8 +17,8 @@ class ReceiveFromAttribute implements PropertyAttributeInterface
         $this->fromKey = $fromKey;
     }
 
-    public function applyTo(object $dto, DataObjectInterface $dataObject, \ReflectionProperty $property)
+    public function applyTo(object $obj, DataObjectInterface $dataObject, \ReflectionProperty $property)
     {
-        $dto->{$property->name} = $dataObject->get($this->fromKey);
+        $obj->{$property->name} = $dataObject->get($this->fromKey);
     }
 }

@@ -1,29 +1,29 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer;
+namespace kirillbdev\PhpDataTransformer;
 
-use kirillbdev\PhpDataTransfer\Contracts\DataObjectInterface;
-use kirillbdev\PhpDataTransfer\Exceptions\TransferException;
+use kirillbdev\PhpDataTransformer\Contracts\DataObjectInterface;
+use kirillbdev\PhpDataTransformer\Exceptions\TransformException;
 
-final class DtoTransfer
+final class DataTransformer
 {
-    public static function makeDTO(string $dtoClass, DataObjectInterface $dataObject)
+    public static function transform(string $className, DataObjectInterface $dataObject)
     {
         try {
-            $refInstance = new \ReflectionClass($dtoClass);
+            $refInstance = new \ReflectionClass($className);
         } catch (\ReflectionException $e) {
-            throw new TransferException("Class $dtoClass not found.");
+            throw new TransformException("Class $className not found.");
         }
 
-        $dto = new $dtoClass;
+        $obj = new $className;
         $props = $refInstance->getProperties(\ReflectionProperty::IS_PUBLIC);
 
         foreach ($props as $prop) {
             // Check if has property transform method
             $transformMethod = 'transform' . self::normalizePropertyName($prop->name) . 'Property';
 
-            if (method_exists($dto, $transformMethod)) {
-                $dto->{$prop->name} = call_user_func([ $dto, $transformMethod ], $dataObject);
+            if (method_exists($obj, $transformMethod)) {
+                $obj->{$prop->name} = call_user_func([ $obj, $transformMethod ], $dataObject);
 
                 continue;
             }
@@ -34,15 +34,15 @@ final class DtoTransfer
 
             // Apply default getting logic if not found receive attribute
             if ( ! isset($attributes['receive_from'])) {
-                $dto->{$prop->name} = $dataObject->get($prop->name);
+                $obj->{$prop->name} = $dataObject->get($prop->name);
             }
 
             foreach ($attributes as $attribute) {
-                $attribute->applyTo($dto, $dataObject, $prop);
+                $attribute->applyTo($obj, $dataObject, $prop);
             }
         }
 
-        return $dto;
+        return $obj;
     }
 
     private static function normalizePropertyName($name)

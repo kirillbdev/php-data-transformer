@@ -1,11 +1,11 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer;
+namespace kirillbdev\PhpDataTransformer;
 
-use kirillbdev\PhpDataTransfer\Attributes\CastAttribute;
-use kirillbdev\PhpDataTransfer\Attributes\DtoCastAttribute;
-use kirillbdev\PhpDataTransfer\Attributes\ReceiveFromAttribute;
-use kirillbdev\PhpDataTransfer\Contracts\PropertyAttributeInterface;
+use kirillbdev\PhpDataTransformer\Attributes\CastAttribute;
+use kirillbdev\PhpDataTransformer\Attributes\ObjectCastAttribute;
+use kirillbdev\PhpDataTransformer\Attributes\ReceiveFromAttribute;
+use kirillbdev\PhpDataTransformer\Contracts\PropertyAttributeInterface;
 
 class AttributeParser
 {
@@ -28,8 +28,8 @@ class AttributeParser
         }
 
         // Check if need to cast as other DTO
-        if (preg_match('/DTO<([^>]+)>/', $docComment, $dtoMatch)) {
-            $attributes['cast'] = new DtoCastAttribute($dtoMatch[1]);
+        if (preg_match('/<([^>]+)>/', $docComment, $dtoMatch)) {
+            $attributes['cast'] = new ObjectCastAttribute($dtoMatch[1]);
         }
         elseif (preg_match('/@Cast\("([^"]+)"\)/U', $docComment, $matches)) {
             $attributes['cast'] = new CastAttribute($matches[1]);

@@ -1,11 +1,11 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\Tests\Unit;
+namespace kirillbdev\PhpDataTransformer\Tests\Unit;
 
-use kirillbdev\PhpDataTransfer\DataObject\ArrayDataObject;
-use kirillbdev\PhpDataTransfer\DtoTransfer;
-use kirillbdev\PhpDataTransfer\Tests\Dto\UserDto;
-use kirillbdev\PhpDataTransfer\Tests\Dto\UserRoleDto;
+use kirillbdev\PhpDataTransformer\DataObject\ArrayDataObject;
+use kirillbdev\PhpDataTransformer\DataTransformer;
+use kirillbdev\PhpDataTransformer\Tests\Dto\UserDto;
+use kirillbdev\PhpDataTransformer\Tests\Dto\UserRoleDto;
 use PHPUnit\Framework\TestCase;
 
 class RecursiveTransferTest extends TestCase
@@ -13,7 +13,7 @@ class RecursiveTransferTest extends TestCase
     public function testMakeHierarchyDTO()
     {
         /** @var UserDto $dto */
-        $dto = DtoTransfer::makeDTO(UserDto::class, new ArrayDataObject([
+        $dto = DataTransformer::transform(UserDto::class, new ArrayDataObject([
             'id' => '10',
             'name' => 'Jonny',
             'role' => [

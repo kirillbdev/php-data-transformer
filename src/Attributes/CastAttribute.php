@@ -1,9 +1,9 @@
 <?php
 
-namespace kirillbdev\PhpDataTransfer\Attributes;
+namespace kirillbdev\PhpDataTransformer\Attributes;
 
-use kirillbdev\PhpDataTransfer\Contracts\DataObjectInterface;
-use kirillbdev\PhpDataTransfer\Contracts\PropertyAttributeInterface;
+use kirillbdev\PhpDataTransformer\Contracts\DataObjectInterface;
+use kirillbdev\PhpDataTransformer\Contracts\PropertyAttributeInterface;
 
 class CastAttribute implements PropertyAttributeInterface
 {
@@ -17,19 +17,19 @@ class CastAttribute implements PropertyAttributeInterface
         $this->castType = $castType;
     }
 
-    public function applyTo(object $dto, DataObjectInterface $dataObject, \ReflectionProperty $property)
+    public function applyTo(object $obj, DataObjectInterface $dataObject, \ReflectionProperty $property)
     {
-        $value = $dto->{$property->name};
+        $value = $obj->{$property->name};
 
         switch ($this->castType) {
             case 'int':
-                $dto->{$property->name} = (int)$value;
+                $obj->{$property->name} = (int)$value;
                 break;
             case 'float':
-                $dto->{$property->name} = (float)$value;
+                $obj->{$property->name} = (float)$value;
                 break;
             case 'bool':
-                $dto->{$property->name} = (bool)$value;
+                $obj->{$property->name} = (bool)$value;
                 break;
         }
     }
