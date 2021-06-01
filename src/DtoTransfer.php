@@ -28,20 +28,17 @@ final class DtoTransfer
                 continue;
             }
 
-            $doc = $prop->getDocComment();
+            // Otherwise getting value and apply attributes (if it exists)
+            $attributeParser = new AttributeParser();
+            $attributes = $attributeParser->parseAttributes($prop);
 
-            if ($doc !== false && preg_match('/@ReceiveFrom\("([^"]+)"\)/', $doc, $matches)) {
-                $key = $matches[1];
+            // Apply default getting logic if not found receive attribute
+            if ( ! isset($attributes['receive_from'])) {
+                $dto->{$prop->name} = $dataObject->get($prop->name);
             }
-            else {
-                $key = $prop->name;
-            }
 
-            $dto->{$prop->name} = $dataObject->get($key);
-
-            // Try to cast
-            if ($doc !== false && preg_match('/@Cast\("([^"]+)"\)/', $doc, $matches) && $matches[1] === 'int') {
-                $dto->{$prop->name} = (int)$dto->{$prop->name};
+            foreach ($attributes as $attribute) {
+                $attribute->applyTo($dto, $dataObject, $prop);
             }
         }
 
