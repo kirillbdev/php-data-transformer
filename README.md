@@ -77,7 +77,7 @@ $dto = DtoTransfer::makeDTO(UserDto::class, new ArrayDataObject([
 
 ### 3. Type casting
 
-You can specify which type to cast for certain properties in DTO. Use the `@Cast("type")` annotation for this. At this moment package support next types: int, float, bool.
+You can specify which type you want to cast for certain properties in DTO. Use the `@Cast("type")` annotation for this. At this moment package support next types: int, float, bool.
 
 ```php
 namespace MyApp\Dto;
