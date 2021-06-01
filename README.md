@@ -4,7 +4,7 @@ This package helps you to transform custom data into typed objects.
 
 ### Using composer
 
-`composer require kirillbdev/php-data-transfer ^0.1.0`
+`composer require kirillbdev/php-data-transformer ^1.0.0`
 
 ## Examples
 
@@ -23,16 +23,16 @@ class UserDto
 }
 ```
 
-Now, using DtoTransfer, let's transform an arbitrary data array into our DTO.
+Now, using DataTransformer, let's transform an arbitrary data array into our DTO.
 
 ```php
 namespace MyApp;
 
-use kirillbdev\PhpDataTransfer\DtoTransfer;
-use kirillbdev\PhpDataTransfer\DataObject\ArrayDataObject;
+use kirillbdev\PhpDataTransformer\DataTransformer;
+use kirillbdev\PhpDataTransformer\DataObject\ArrayDataObject;
 use MyApp\Dto\UserDto;
 
-$dto = DtoTransfer::makeDTO(UserDto::class, new ArrayDataObject([
+$dto = DataTransformer::transform(UserDto::class, new ArrayDataObject([
     'id' => 1,
     'firstname' => 'Jon'
 ]));
@@ -65,11 +65,11 @@ Now, try to transform data.
 ```php
 namespace MyApp;
 
-use kirillbdev\PhpDataTransfer\DtoTransfer;
-use kirillbdev\PhpDataTransfer\DataObject\ArrayDataObject;
+use kirillbdev\PhpDataTransformer\DataTransformer;
+use kirillbdev\PhpDataTransformer\DataObject\ArrayDataObject;
 use MyApp\Dto\UserDto;
 
-$dto = DtoTransfer::makeDTO(UserDto::class, new ArrayDataObject([
+$dto = DataTransformer::transform(UserDto::class, new ArrayDataObject([
     'id' => 1,
     'first_name' => 'Jon' // Custom key that differ of our DTO property.
 ]));
@@ -92,6 +92,21 @@ class UserDto
 }
 ```
 
+You also can cast property to other typed object. For this you can use `@Cast(<classname>)` annotation. I recommend you to use full class name for this (includes namespace).
+
+```php
+namespace MyApp\Dto;
+
+class UserDto
+{
+    /**
+     * We want to cast this property to UserRoleDto.
+     * @Cast(<MyApp\Dto\UserRole>)
+     */
+    public $role;
+}
+```
+
 ### 4. Custom transformation logic
 
 Sometimes there are situations when you need to implement custom transformation logic of the desired property. In this case, you can implement an arbitrary transformation method for the desired property. The method must be named `transform{PropertyName}Property` and take a single argument `DataObjectInterface`, which is used to retrieve the data.
@@ -99,7 +114,7 @@ Sometimes there are situations when you need to implement custom transformation 
 ```php
 namespace MyApp\Dto;
 
-use kirillbdev\PhpDataTransfer\Contracts\DataObjectInterface;
+use kirillbdev\PhpDataTransformer\Contracts\DataObjectInterface;
 
 class UserDto
 {
