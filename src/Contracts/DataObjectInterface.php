@@ -1,6 +1,6 @@
 <?php
 
-namespace kirillbdev\PhpDto\Contracts;
+namespace kirillbdev\PhpDataTransfer\Contracts;
 
 interface DataObjectInterface
 {
