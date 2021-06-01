@@ -3,6 +3,7 @@
 namespace kirillbdev\PhpDataTransfer;
 
 use kirillbdev\PhpDataTransfer\Attributes\CastAttribute;
+use kirillbdev\PhpDataTransfer\Attributes\DtoCastAttribute;
 use kirillbdev\PhpDataTransfer\Attributes\ReceiveFromAttribute;
 use kirillbdev\PhpDataTransfer\Contracts\PropertyAttributeInterface;
 
@@ -26,7 +27,11 @@ class AttributeParser
             $attributes['receive_from'] = new ReceiveFromAttribute($matches[1]);
         }
 
-        if (preg_match('/@Cast\("([^"]+)"\)/U', $docComment, $matches)) {
+        // Check if need to cast as other DTO
+        if (preg_match('/DTO<([^>]+)>/', $docComment, $dtoMatch)) {
+            $attributes['cast'] = new DtoCastAttribute($dtoMatch[1]);
+        }
+        elseif (preg_match('/@Cast\("([^"]+)"\)/U', $docComment, $matches)) {
             $attributes['cast'] = new CastAttribute($matches[1]);
         }
 
