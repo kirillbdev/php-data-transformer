@@ -43,7 +43,7 @@ in our case it is an array). As you see, it's simple.
 
 ### 2. Receive custom keys from DataObject
 
-There are situations when the keys of the input data differ from the property names of our DTO. In this case, we can receive data of the desired property using the @ReceiveFrom annotation.
+There are situations when the keys of the input data differ from the property names of our DTO. In this case, we can receive data of the desired property using the `@ReceiveFrom` annotation.
 
 ```php
 namespace MyApp\Dto;
