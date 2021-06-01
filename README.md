@@ -75,7 +75,24 @@ $dto = DtoTransfer::makeDTO(UserDto::class, new ArrayDataObject([
 ]));
 ```
 
-### 3. Custom transformation logic
+### 3. Type casting
+
+You can specify which type to cast for certain properties in DTO. Use the `@Cast("type")` annotation for this. At this moment package support next types: int, float, bool.
+
+```php
+namespace MyApp\Dto;
+
+class UserDto
+{
+    /**
+     * We want to cast this property to integer.
+     * @Cast("int")
+     */
+    public $id;
+}
+```
+
+### 4. Custom transformation logic
 
 Sometimes there are situations when you need to implement custom transformation logic of the desired property. In this case, you can implement an arbitrary transformation method for the desired property. The method must be named `transform{PropertyName}Property` and take a single argument `DataObjectInterface`, which is used to retrieve the data.
 
