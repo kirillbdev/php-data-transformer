@@ -7,6 +7,18 @@ use kirillbdev\PhpDataTransformer\Exceptions\TransformException;
 
 final class DataTransformer
 {
+    public const CONFIG_PROPERTY_FILTER = 'property_filter';
+
+    public const PROPERTY_FILTER_PUBLIC = \ReflectionProperty::IS_PUBLIC;
+    public const PROPERTY_FILTER_PRIVATE = \ReflectionProperty::IS_PRIVATE;
+
+    /**
+     * @var array
+     */
+    private static $options = [
+        self::CONFIG_PROPERTY_FILTER => self::PROPERTY_FILTER_PUBLIC
+    ];
+
     public static function transform(string $className, DataObjectInterface $dataObject)
     {
         try {
@@ -16,7 +28,7 @@ final class DataTransformer
         }
 
         $obj = new $className;
-        $props = $refInstance->getProperties(\ReflectionProperty::IS_PUBLIC);
+        $props = $refInstance->getProperties(self::getConfig(self::CONFIG_PROPERTY_FILTER));
 
         foreach ($props as $prop) {
             // Check if has property transform method
@@ -43,6 +55,30 @@ final class DataTransformer
         }
 
         return $obj;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     * @throws \InvalidArgumentException
+     */
+    private static function getConfig(string $name)
+    {
+        if (isset(self::$options[$name])) {
+            return self::$options[$name];
+        }
+
+        throw new \InvalidArgumentException("Invalid option name '$name'");
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public static function config(string $name, $value): void
+    {
+        self::$options[$name] = $value;
     }
 
     private static function normalizePropertyName($name)
